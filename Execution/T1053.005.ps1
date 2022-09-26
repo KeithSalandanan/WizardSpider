@@ -5,8 +5,8 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
         exit;
     }
 
-schtasks /create /tn "T1053_005_OnLogon" /sc onlogon /tr "cmd.exe /c calc.exe"
-schtasks /create /tn "T1053_005_OnStartup" /sc onstart /ru system /tr "cmd.exe /c calc.exe"
+Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList /c 'schtasks /create /tn "T1053_005_OnLogon" /sc onlogon /tr "cmd.exe /c calc.exe"'
+Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList /c 'schtasks /create /tn "T1053_005_OnStartup" /sc onstart /ru system /tr "cmd.exe /c calc.exe"'
 
 #Cleanup Commands:
 schtasks /delete /tn "T1053_005_OnLogon" /f >nul 2>&1
