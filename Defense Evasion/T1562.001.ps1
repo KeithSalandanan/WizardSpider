@@ -40,6 +40,9 @@ function CheckSysmonExist {
     }
 }
 
-if (CheckSysmonExist -and CheckSysmonInstalled -and CheckSysmonLoaded ) {
-    Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c  "fltmc.exe unload SysmonDrv"'
+while ((CheckSysmonExist -is $false) -and (CheckSysmonInstalled -is $false ) -and (CheckSysmonLoaded -is $false) ) {
+    CheckSysmonExist
+    CheckSysmonInstalled
+    CheckSysmonLoaded
 }
+Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c  "fltmc.exe unload SysmonDrv"'
