@@ -1,3 +1,4 @@
+#Atomic Test #10 - Unload Sysmon Filter Driver
 
 #CHECK IF INSTALLED
 function CheckSysmonInstalled {
@@ -6,7 +7,7 @@ function CheckSysmonInstalled {
         return $true 
     } else{ 
         if(cmd.exe /c "where.exe Sysmon.exe 2> nul | findstr Sysmon 2> nul") { 
-            C:\Windows\Sysmon.exe -accepteula -i 
+            C:\Windows\Sysmon64.exe -accepteula -i 
         } else{ 
             Set-Location $env:TEMP\Sysmon\; .\Sysmon.exe -accepteula -i
         }
@@ -20,8 +21,8 @@ function CheckSysmonLoaded {
         return $true 
         # exit 0 
     } else{ 
-        sysmon -u
-        sysmon -accepteula -i
+        Start-Process -Filepath PowerShell  -Verb runAs -ArgumentList '/c  "sysmon.exe -u"'
+        Start-Process -Filepath PowerShell  -Verb runAs -ArgumentList '/c  "sysmon.exe -accepteula -i"'
         return $false 
     }
 }
