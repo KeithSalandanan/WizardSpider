@@ -1,10 +1,9 @@
-#Atomic Test #4 - Delete a single file - Windows cmd
+#Atomic Test #6 - Delete a single file - Windows PowerShell
 
-Start-Process -Filepath cmd.exe -ArgumentList '/c IF EXIST "%temp%\deleteme_T1551.004" ( 
-    EXIT 0 
-) ELSE ( 
-    echo deleteme_T1551.004 >> %temp%\deleteme_T1551.004
-    EXIT 1 
-)
+if (Test-Path $env:TEMP\deleteme_T1551.004) {
+   
+} else {
+    New-Item -Path $env:TEMP\deleteme_T1551.004 | Out-Null
+}
 
-del /f %temp%\deleteme_T1551.004"'
+Remove-Item -path $env:TEMP\deleteme_T1551.004
