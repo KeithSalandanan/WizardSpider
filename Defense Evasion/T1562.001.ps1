@@ -47,3 +47,9 @@ while ((CheckSysmonExist -is $false) -and (CheckSysmonInstalled -is $false ) -an
     CheckSysmonLoaded
 }
 Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c  "fltmc.exe unload SysmonDrv"'
+
+#Cleanup Commands:
+# sysmon -u -i > nul 2>&1
+# sysmon -i -accepteula -i > nul 2>&1
+# %temp%\Sysmon\sysmon.exe -u > nul 2>&1
+# %temp%\Sysmon\sysmon.exe -accepteula -i > nul 2>&1
