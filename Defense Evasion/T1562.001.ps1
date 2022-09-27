@@ -41,5 +41,5 @@ function CheckSysmonExist {
 }
 
 if (CheckSysmonExist -and CheckSysmonInstalled -and CheckSysmonLoaded ) {
-    fltmc.exe unload SysmonDrv
+    Start-Process -Filepath cmd.exe  -Verb runAs -ArgumentList '/c  "fltmc.exe unload SysmonDrv"'
 }
